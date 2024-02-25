@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="E:\Programming\the-nature-of-code-with-raylib\Force\Force-2.2\build\CMakeFiles\896dc42f3011d2c51576ecb0f7b2ab82\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{54473626-48B0-3BFD-AB88-2206FF2D9D7C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

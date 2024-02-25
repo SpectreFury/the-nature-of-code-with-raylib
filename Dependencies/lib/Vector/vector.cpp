@@ -21,8 +21,8 @@ void Vector::mult(float a)
 
 void Vector::div(float a)
 {
-    x *= a;
-    y *= a;
+    x /= a;
+    y /= a;
 }
 
 float Vector::mag()
@@ -63,4 +63,9 @@ void Vector::setMag(float value)
 {
     normalize();
     mult(value);
+}
+
+Vector Vector::copy()
+{
+    return Vector{x, y};
 }

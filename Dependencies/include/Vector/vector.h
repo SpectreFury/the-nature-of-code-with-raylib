@@ -15,4 +15,5 @@ struct Vector
     void limit(float value);
     float magSq();
     void setMag(float value);
+    Vector copy();
 };
