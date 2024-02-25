@@ -10,35 +10,51 @@ struct Mover
     Vector position = {SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2};
     Vector velocity = {0, 0};
     Vector acceleration = {0, 0};
-    float mass = 1;
+    float radius = 1;
+
+    Mover(float radius)
+    {
+        this->radius = radius;
+    }
+
+    void applyForce(Vector force)
+    {
+        acceleration.add(force);
+    }
 
     void display()
     {
-        DrawCircle(position.x, position.y, 10, BLACK);
-    }
+        DrawCircle(position.x, position.y, radius, BLACK);
+    };
 
     void update()
     {
         velocity.add(acceleration);
         position.add(velocity);
 
-        acceleration = {0, 0};
-    }
-
-    void applyForce(Vector force)
-    {
-        force.div(mass);
-        acceleration.add(force);
+        acceleration.mult(0);
     }
 
     void checkBounds()
     {
-        if (position.x > SCREEN_WIDTH || position.x < 0)
+        if (position.x >= SCREEN_WIDTH)
         {
+            position.x = SCREEN_WIDTH;
             velocity.x = velocity.x * -1;
         }
-        if (position.y > SCREEN_HEIGHT || position.y < 0)
+        if (position.x <= 0)
         {
+            position.x = 0;
+            velocity.x = velocity.x * -1;
+        }
+        if (position.y >= SCREEN_HEIGHT)
+        {
+            position.y = SCREEN_HEIGHT;
+            velocity.y = velocity.y * -1;
+        }
+        if (position.y <= 0)
+        {
+            position.y = 0;
             velocity.y = velocity.y * -1;
         }
     }
@@ -50,33 +66,25 @@ int main()
 
     SetTargetFPS(FLAG_VSYNC_HINT);
 
-    Mover circle;
-    circle.mass = 1;
-    Mover circleHeavy;
-    circle.mass = 2;
-    Vector gravity = {0, 0.1};
-    Vector wind = {0.1, 0};
+    Mover mov(10);
+    Vector gravity = {0, 0.1f};
+    Vector wind = {0.1f, 0};
 
     while (!WindowShouldClose())
     {
-        circleHeavy.checkBounds();
-        circleHeavy.applyForce(gravity);
-        circleHeavy.update();
-        circle.checkBounds();
-        circle.applyForce(gravity);
-        circle.update();
+        mov.applyForce(gravity);
+        mov.update();
+        mov.checkBounds();
 
         if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
         {
-            circle.applyForce(wind);
-            circleHeavy.applyForce(wind);
+            mov.applyForce(wind);
         }
 
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
-        circle.display();
-        circleHeavy.display();
+        mov.display();
 
         EndDrawing();
     }
